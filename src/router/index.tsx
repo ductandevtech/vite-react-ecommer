@@ -1,0 +1,22 @@
+// router.tsx
+import { createBrowserRouter } from 'react-router-dom'
+// import HomePage from '~/pages/Customer/HomePage'
+import HomePage from '~/pages/Customer/HomePage/HomePage'
+import { BrowserRouter } from "react-router"
+import LoginPage from '~/pages/Customer/LoginPage/LoginPage'
+import RegisterPage from '~/pages/Customer/RegisterPage/Register'
+export const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <HomePage />
+  },
+  {
+    path: '/customer/login',
+    element: <LoginPage />
+  },
+  {
+    path: '/customer/register',
+    element: <RegisterPage />
+  }
+])
+

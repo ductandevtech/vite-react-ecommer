@@ -1,0 +1,13 @@
+.custom-menu {
+  background-color: #ffffff;
+}
+.custom-menu .ant-menu-item:hover {
+  background-color: linear-gradient(to right, #ff9a9e, #fad0c4);
+  color: "green";
+}
+.custom-menu .ant-menu-item.ant-menu-item-selected {
+  background-color: linear-gradient(to right, #ff9a9e, #fad0c4);
+  color: #ce2c56;
+}
+
+/*# sourceMappingURL=main.css.map */

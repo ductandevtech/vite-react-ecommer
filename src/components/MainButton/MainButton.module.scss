@@ -1,0 +1,18 @@
+.seeAllButton {
+  padding: 10px 20px;
+  background-color: transparent;
+  border: 1px solid #aaa;
+  color: white;
+  font-weight: 500;
+  font-size: 16px;
+  cursor: pointer;
+  position: relative;
+  border-radius: 20px 0 40px 20px; // chỉnh góc theo hình
+
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: #444;
+    border-color: #fff;
+  }
+}

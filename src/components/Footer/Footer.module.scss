@@ -1,0 +1,62 @@
+.footer {
+  background: #fff;
+  padding: 50px 80px;
+}
+
+.footerColumn {
+  :global(.ant-typography) {
+    margin-bottom: 12px;
+    color: #000 !important;
+  }
+
+  :global(.ant-space-vertical) {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+}
+
+.logo {
+  width: 100px;
+  margin-bottom: 20px;
+}
+
+.icon {
+  font-size: 20px;
+  color: #000;
+  cursor: pointer;
+
+  &:hover {
+    color: #c1605e;
+  }
+}
+
+.hotline {
+  margin-top: 20px;
+  background: #222;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-weight: 600;
+  display: inline-block;
+}
+
+.downloadApp {
+  margin-top: 20px;
+
+  .ant-typography {
+    margin-bottom: 10px;
+  }
+}
+
+.appImage {
+  width: 120px;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.copyright {
+  text-align: center;
+  margin-top: 50px;
+  color: #888;
+}
