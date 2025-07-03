@@ -1,8 +1,10 @@
 .footer {
   background: #fff;
-  padding: 50px 80px;
-}
 
+}
+:global(.css-dev-only-do-not-override-hk9he3.ant-layout-footer ) {
+  padding: 95px;
+}
 .footerColumn {
   :global(.ant-typography) {
     margin-bottom: 12px;
