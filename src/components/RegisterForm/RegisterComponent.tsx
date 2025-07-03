@@ -1,11 +1,17 @@
-import React, { useEffect, useState } from "react";
-import { Formik, Form, Field, ErrorMessage } from "formik";
-import * as Yup from "yup";
-import { Row, Col, Button, Select, Input } from "antd";
-import { getProvinces, getDistrictsByProvinceCode, getWardsByDistrictCode } from '~/services/apiAddress';
-import styles from './Register.module.scss';
 
-const { Option } = Select;
+import React, { useEffect, useState } from "react"
+import { Formik, Form, Field, ErrorMessage } from "formik"
+import * as Yup from "yup"
+import { DatePicker } from "antd"
+import moment from "moment"
+import { Row, Col, Button, Select, Input } from "antd"
+import { getProvinces, getDistrictsByProvinceCode, getWardsByDistrictCode } from '~/services/apiAddress'
+import styles from './Register.module.scss'
+import LoginRegisterButton from "../LoginRegisterButton/LoginRegisterButtonComponent"
+import { useAddressForm } from '~/hooks/handleAddressForm';
+
+const { Option } = Select
+
 
 const RegisterSchema = Yup.object().shape({
   firstName: Yup.string().required("Bắt buộc").max(15, "Tối đa 15 ký tự"),
@@ -25,40 +31,17 @@ const RegisterSchema = Yup.object().shape({
 });
 
 const RegisterForm: React.FC = () => {
-  const [cities, setCities] = useState<any[]>([]);
-  const [districts, setDistricts] = useState<any[]>([]);
-  const [wards, setWards] = useState<any[]>([]);
 
-  useEffect(() => {
-    getProvinces().then((res) => setCities(res.data));
-  }, []);
-
-  const handleCityChange = (value: string, setFieldValue: any) => {
-    const selectedCity = cities.find((city) => city.name === value);
-    setFieldValue("city", value);
-    setFieldValue("district", "");
-    setFieldValue("ward", "");
-    if (selectedCity) {
-      getDistrictsByProvinceCode(selectedCity.code).then((res) => {
-        setDistricts(res.data.districts || []);
-        setWards([]);
-      });
-    }
-  };
-
-  const handleDistrictChange = (value: string, setFieldValue: any) => {
-    const selectedDistrict = districts.find((d) => d.name === value);
-    setFieldValue("district", value);
-    setFieldValue("ward", "");
-    if (selectedDistrict) {
-      getWardsByDistrictCode(selectedDistrict.code).then((res) => {
-        setWards(res.data.wards || []);
-      });
-    }
-  };
+  const {
+    cities,
+    districts,
+    wards,
+    handleCityChange,
+    handleDistrictChange
+  } = useAddressForm();
 
   return (
-    <div className={styles.registerContainer}>
+    <div className={styles["register-container"]}>
       <h2 className={styles.title}>Đăng ký</h2>
 
       <Formik
@@ -83,36 +66,51 @@ const RegisterForm: React.FC = () => {
       >
         {({ setFieldValue }) => (
           <Form>
-            <Row gutter={[12, 16]}>
+            <Row gutter={40}>
               <Col span={12}>
-                <Row gutter={[12, 16]}>
+                <Row gutter={[40, 16]}>
                   <Col span={12}>
                     <label>Họ*</label>
-                    <Field name="lastName" as={Input} />
+                    <Field name="lastName" as={Input} placeholder='Họ...' />
+
                     <ErrorMessage name="lastName" component="div" className={styles.error} />
                   </Col>
                   <Col span={12}>
                     <label>Tên*</label>
-                    <Field name="firstName" as={Input} />
+
+
+                    <Field name="firstName" as={Input} placeholder='Tên...' />
                     <ErrorMessage name="firstName" component="div" className={styles.error} />
                   </Col>
                 </Row>
-                <Row gutter={[12, 16]}>
+                <Row gutter={[40, 16]}>
                   <Col span={12}>
                     <label>Email*</label>
-                    <Field name="email" as={Input} />
+                    <Field name="email" as={Input} placeholder='Email...' />
+
                     <ErrorMessage name="email" component="div" className={styles.error} />
                   </Col>
                   <Col span={12}>
                     <label>Điện thoại*</label>
-                    <Field name="phone" as={Input} />
+
+                    <Field name="phone" as={Input} placeholder='Điện thoại...' />
                     <ErrorMessage name="phone" component="div" className={styles.error} />
                   </Col>
                 </Row>
-                <Row gutter={[12, 16]}>
+                <Row gutter={[40, 16]}>
                   <Col span={12}>
                     <label>Ngày sinh*</label>
-                    <Field name="dob" as={Input} />
+                    <DatePicker
+                      className={styles["select-field"]}
+                      style={{ width: '100%' }}
+                      placeholder="Chọn ngày sinh"
+                      format="DD/MM/YYYY"
+                      onChange={(date, dateString) => {
+                        setFieldValue("dob", dateString);
+                      }}
+                      allowClear
+                    />
+
                     <ErrorMessage name="dob" component="div" className={styles.error} />
                   </Col>
                   <Col span={12}>
@@ -120,23 +118,25 @@ const RegisterForm: React.FC = () => {
                     <Select
                       onChange={(value) => setFieldValue("gender", value)}
                       placeholder="Chọn giới tính"
-                      className={styles.selectField}
+                      className={styles["select-field"]}
                     >
-                      <Option value="male">Nam</Option>
+                      <Option value="male" >Nam</Option>
+
                       <Option value="female">Nữ</Option>
                       <Option value="other">Khác</Option>
                     </Select>
                     <ErrorMessage name="gender" component="div" className={styles.error} />
                   </Col>
                 </Row>
-                <Row gutter={[12, 16]}>
+                <Row gutter={[40, 16]}>
                   <Col span={12}>
                     <label>Tỉnh/TP*</label>
                     <Select
                       onChange={(value) => handleCityChange(value, setFieldValue)}
                       placeholder="Chọn Tỉnh/TP"
                       allowClear
-                      className={styles.selectField}
+                      className={styles["select-field"]}
+
                     >
                       {cities.map((city) => (
                         <Option key={city.code} value={city.name}>
@@ -152,7 +152,7 @@ const RegisterForm: React.FC = () => {
                       onChange={(value) => handleDistrictChange(value, setFieldValue)}
                       placeholder="Chọn Quận/Huyện"
                       allowClear
-                      className={styles.selectField}
+                      className={styles["select-field"]}
                     >
                       {districts.map((district) => (
                         <Option key={district.code} value={district.name}>
@@ -163,14 +163,16 @@ const RegisterForm: React.FC = () => {
                     <ErrorMessage name="district" component="div" className={styles.error} />
                   </Col>
                 </Row>
-                <Row gutter={[12, 16]}>
-                  <Col span={12}>
+
+                <Row gutter={[40, 16]}>
+                  <Col span={24}>
                     <label>Phường/Xã*</label>
                     <Select
                       onChange={(value) => setFieldValue("ward", value)}
                       placeholder="Chọn Phường/Xã"
                       allowClear
-                      className={styles.selectField}
+                      className={styles["select-field"]}
+
                     >
                       {wards.map((ward) => (
                         <Option key={ward.code} value={ward.name}>
@@ -191,25 +193,30 @@ const RegisterForm: React.FC = () => {
               </Col>
 
               <Col span={12}>
-                <Row gutter={12}>
+
+                <Row gutter={40}>
                   <Col span={24}>
                     <label>Mật khẩu*</label>
-                    <Field name="password" type="password" as={Input.Password} />
+                    <Field name="password" type="password" as={Input.Password} placeholder='Mật khẩu...' />
                     <ErrorMessage name="password" component="div" className={styles.error} />
                   </Col>
                 </Row>
-                <Row gutter={12}>
+                <Row gutter={[40, 16]}>
                   <Col span={24}>
                     <label>Nhập lại mật khẩu*</label>
-                    <Field name="confirmPassword" type="password" as={Input.Password} />
+                    <Field name="confirmPassword" type="password" as={Input.Password} placeholder='Nhập lại mật khẩu...' />
                     <ErrorMessage name="confirmPassword" component="div" className={styles.error} />
                   </Col>
                 </Row>
+                <Row>
+                  <label><input type="checkbox" /> Đồng ý với các điều khoản của IVY</label>
+                </Row>
+                <Row>
+                  <label><input type="checkbox" /> Đăng ký nhận bản tin</label>
+                </Row>
                 <Row gutter={12}>
                   <Col span={24} className={styles.submitWrapper}>
-                    <Button style={{ width: '100%' }} type="primary" htmlType="submit">
-                      Đăng ký
-                    </Button>
+                    <LoginRegisterButton text='Đăng ký' />
                   </Col>
                 </Row>
               </Col>
@@ -218,7 +225,9 @@ const RegisterForm: React.FC = () => {
         )}
       </Formik>
     </div>
-  );
-};
 
-export default RegisterForm;
+  )
+}
+
+export default RegisterForm
+

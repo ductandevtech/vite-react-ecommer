@@ -4,7 +4,13 @@ import { Carousel, Col, Row } from 'antd'
 import styles from './Slider.module.scss' 
 import '~/styles/main.scss'
 
-const SliderComponent = () => (
+interface SliderComponentProps {
+  images: string[];
+  width?: string;
+  height?: string;
+}
+
+const SliderComponent: React.FC<SliderComponentProps> = ({ images, width='100%', height='100%' }) => (
   <Row>
     <Col span={24}>
       <Carousel
@@ -17,16 +23,13 @@ const SliderComponent = () => (
         draggable
         effect="scrollx"
         pauseOnHover >
-        <div className={styles['slider-image-wrapper']}>
-          <a href="">
-            <img className={styles['slider-image']} src="https://cotton4u.vn/files/news/2025/06/03/1709a21e8e1c7b0f2fdc03f43c3471b0.webp" alt="Slide 1" />
-          </a>
-        </div>
-        <div className={styles['slider-image-wrapper']}>
-          <a href="">
-            <img className={styles['slider-image']} src="https://cotton4u.vn/files/news/2025/06/25/fe731be98a6cffcf815840d34f760324.webp" alt="Slide 2" />
-          </a>
-        </div>
+        {images.map((image, index) => (
+          <div className={styles['slider-image-wrapper']} key={index}>
+            <a href="">
+              <img className={styles['slider-image']} src={image} alt={`Slide ${index + 1}`} style={{ width, height }} />
+            </a>
+          </div>
+        ))}
       </Carousel>
     </Col>
   </Row>
