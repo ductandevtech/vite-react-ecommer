@@ -4,7 +4,8 @@ import { createBrowserRouter } from 'react-router-dom'
 import HomePage from '~/pages/Customer/HomePage/HomePage'
 import { BrowserRouter } from "react-router"
 import LoginPage from '~/pages/Customer/LoginPage/LoginPage'
-import RegisterPage from '~/pages/Customer/RegisterPage/Register'
+import RegisterPage from '~/pages/Customer/RegisterPage/RegisterPage'
+import ManagementUser from '~/pages/Admin/ManagementUser/ManagementUser'
 export const router = createBrowserRouter([
   {
     path: '/',
@@ -17,6 +18,10 @@ export const router = createBrowserRouter([
   {
     path: '/customer/register',
     element: <RegisterPage />
+  },
+  {
+    path:'/admin/user-management',
+    element: <ManagementUser />
   }
 ])
 

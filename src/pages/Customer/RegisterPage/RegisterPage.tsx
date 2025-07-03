@@ -1,6 +1,6 @@
 // src/pages/RegisterPage.tsx
 import React from 'react';
-import AuthForm from '~/components/AuthForm/AuthForm';
+import RegisterForm from '~/components/RegisterForm/RegisterComponent';
 import FooterComponent from '~/components/Footer/FooterComponent';
 import HeaderComponent from '~/components/Header/HeaderComponent';
 
@@ -9,7 +9,13 @@ const RegisterPage = () => {
     console.log('Register:', values)
   }
 
-  return <AuthForm isLogin={false} onSubmit={handleRegister} />
+  return (
+    <>
+      <HeaderComponent />
+      <RegisterForm />
+      <FooterComponent />
+    </>
+  )
 }
 
 export default RegisterPage;

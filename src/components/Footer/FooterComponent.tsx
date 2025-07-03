@@ -10,14 +10,14 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faZ } from '@fortawesome/free-solid-svg-icons'
 import styles from './Footer.module.scss'
-import MainButtonProps from '../MainButton/MainButtonComponent'
+import MainButtonProps from '../LoginRegisterButton/LoginRegisterButtonComponent'
 const { Footer } = Layout
 const { Title, Link } = Typography
 
 const FooterComponent: React.FC = () => {
   return (
     <Footer className={styles.footer}>
-      <Row gutter={[32, 32]} justify="space-between" style={{ padding:'0 45px'}}>
+      <Row gutter={[32, 32]} justify="space-between">
         <Col xs={24} md={6} className={styles.footerColumn}>
           <img
             src="https://pubcdn.ivymoda.com/ivy2/images/logo.png"
