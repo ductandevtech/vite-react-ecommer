@@ -1,0 +1,98 @@
+// Màu & biến cơ bản
+
+$error-color: #e53935;
+$text-color: #222;
+$border-radius: 12px;
+$input-padding: 12px 16px;
+
+.auth-container {
+  padding: 40px;
+  display: flex;
+  justify-content: space-around;
+  margin-top: 40px;
+}
+
+.auth-box {
+  padding: 32px;
+  height: 100%;
+
+  .auth-header-title {
+    text-align: center;
+    .auth-title {
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 30px;
+    margin-bottom: 0;
+    color: #221f20;
+  }
+  .auth-description {
+    margin-top: 10px;
+    font-size: 14px;
+    line-height: 24px;
+    margin-bottom: 0;
+    color: #6c6d70;
+  }
+  }
+}
+
+
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin: 20px 0;
+
+  input {
+    padding: $input-padding;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    transition: border-color 0.2s ease;
+
+    &:focus {
+      
+      outline: none;
+    }
+  }
+  .error {
+    font-size: 13px;
+    color: $error-color;
+    margin-top: 6px;
+  }
+}
+
+.form-options {
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+  font-size: 18px;
+  a {
+    color: #221f20;
+    font-size: 14px;
+    line-height: 16px;
+  }
+
+  .remember-me {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  
+  }
+  .links-login-other {
+    margin-top: 12px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .links {
+
+    a {
+      text-decoration: none;
+      transition: color 0.2s ease;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+

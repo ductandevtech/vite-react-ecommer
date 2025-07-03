@@ -1,7 +1,6 @@
 
 
 /**
- * Viết hoa toàn bộ ký tự của một chuỗi.
  * @param str Chuỗi đầu vào
  * @returns Chuỗi viết hoa toàn bộ
  */
