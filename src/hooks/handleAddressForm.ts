@@ -34,12 +34,17 @@ export const useAddressForm = () => {
       })
     }
   }
-
+  const setInitialAddress = async (cityName: string, districtName: string) => {
+    // dùng để set lại danh sách khi edit
+    await handleCityChange(cityName, () => {})
+    await handleDistrictChange(districtName, () => {})
+  }
   return {
     cities,
     districts,
     wards,
     handleCityChange,
     handleDistrictChange,
+    setInitialAddress,
   }
 }

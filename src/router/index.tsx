@@ -6,6 +6,7 @@ import { BrowserRouter } from "react-router"
 import LoginPage from '~/pages/Customer/LoginPage/LoginPage'
 import RegisterPage from '~/pages/Customer/RegisterPage/RegisterPage'
 import ManagementUser from '~/pages/Admin/ManagementUser/ManagementUser'
+import EditUser from '~/components/UserManagement/EditUser'
 export const router = createBrowserRouter([
   {
     path: '/',
@@ -22,6 +23,10 @@ export const router = createBrowserRouter([
   {
     path:'/admin/user-management',
     element: <ManagementUser />
+  },
+  {
+    path: "/users/edit/:id",
+    element: <EditUser />
   }
 ])
 
